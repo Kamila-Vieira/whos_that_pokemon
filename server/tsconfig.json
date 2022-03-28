@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "removeComments": true
+  },
+  "include": ["./src/**/*.ts", "./_test_/**/*.ts"],
+  "exclude": ["./node_modules/*", "dist"]
+}
