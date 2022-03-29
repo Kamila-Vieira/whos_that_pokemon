@@ -1,7 +1,9 @@
-import express from "express";
+import express, { Router, Request, Response } from "express";
 
-const route = express.Router();
+const routes: Router = express.Router();
 
-route.get("/");
+routes.get("/", (_request: Request, response: Response) => {
+  response.send({ message: "Hellooo" });
+});
 
-export default route;
+export default routes;

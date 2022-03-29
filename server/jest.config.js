@@ -1,12 +1,16 @@
-const { resolve } = require("path");
-const root = resolve(__dirname, "./");
-const rootConfig = require(`${root}/jest.config.js`);
-
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  ...rootConfig,
-  ...{
-    rootDir: root,
-    displayName: "program-tests",
-    testMatch: ["<rootDir>/_test_/**/*.test.ts"],
-  },
+  preset: "ts-jest",
+  // The test environment that will be used for testing
+  testEnvironment: "node",
+  // Indicates whether the coverage information should be collected while executing the test
+  collectCoverage: true,
+  // Automatically clear mock calls and instances between every test
+  clearMocks: true,
+  // The glob patterns Jest uses to detect test files
+  testMatch: ["**/__tests__/**/*.test.ts?(x)"],
+  // An array of glob patterns indicating a set of files for which coverage information should be collected
+  collectCoverageFrom: ["src/**"],
+  // The directory where Jest should output its coverage files
+  coverageDirectory: "__tests__/coverage",
 };

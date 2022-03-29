@@ -6,6 +6,6 @@
     "alwaysStrict": true,
     "removeComments": true
   },
-  "include": ["./src/**/*.ts", "./_test_/**/*.ts"],
+  "include": ["./src/**/*.ts", "__tests__/**/*.ts"],
   "exclude": ["./node_modules/*", "dist"]
 }
