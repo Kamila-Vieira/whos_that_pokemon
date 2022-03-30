@@ -1,6 +1,14 @@
+import { config } from "dotenv";
 import mongoose from "mongoose";
 
-const connectdb = mongoose.connect(process.env.CONNECTIONSTRING, {});
-console.log(process.env.CONNECTIONSTRING);
+config({
+  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+});
 
-export default connectdb;
+const dbConnection = mongoose.connect(process.env.CONNECTIONSTRING, {});
+
+dbConnection.then((connection) => {
+  connection.disconnect();
+});
+
+export default dbConnection;

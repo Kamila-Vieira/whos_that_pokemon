@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import routes from "./routes";
 import { config } from "dotenv";
-import connectdb from "./database";
+import dbConnection from "./database";
 
 config({
   path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
@@ -12,13 +12,19 @@ class App {
 
   constructor() {
     this.express = express();
+
+    this.middlewares();
+    this.connection();
+    this.routes();
   }
 
   middlewares() {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
+  }
 
-    connectdb
+  connection() {
+    dbConnection
       .then(() => {
         this.express.emit("dbConnected");
       })

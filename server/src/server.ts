@@ -1,6 +1,4 @@
-import express, { Application } from "express";
-
-const app: Application = express();
+import app from "./app";
 
 const PORT = process.env.PORT || 8000;
 const HOSTNAME = process.env.HOSTNAME || "http://localhost";
