@@ -2,20 +2,30 @@ import { Request, Response } from "express";
 import Pokemon from "../models/Pokemon";
 
 class PokemonController {
-  constructor() {}
+  static DEFAULT_PROPS: string[] = [
+    "name",
+    "type1",
+    "type2",
+    "width",
+    "height",
+    "image",
+  ];
+
   async listPokemons(_request: Request, response: Response) {
     try {
       const pokemons = await Pokemon.list();
 
-      response.status(200).json({ pokemons });
+      return response.status(200).json({ pokemons });
     } catch (error) {
-      response.status(400).json({ error });
+      return response.status(400).json({ error });
     }
   }
 
-  static validateId(response: Response, id: string) {
+  async showPokemon(request: Request, response: Response) {
+    const { id } = request.params;
+
     if (typeof id !== "string") {
-      response.status(400).json({
+      return response.status(400).json({
         errors: [
           {
             message: `Invalid Id`,
@@ -24,10 +34,10 @@ class PokemonController {
           },
         ],
       });
-      return;
     }
+
     if (!Boolean(id)) {
-      response.status(400).json({
+      return response.status(400).json({
         errors: [
           {
             message: `Id is required`,
@@ -36,19 +46,13 @@ class PokemonController {
           },
         ],
       });
-      return;
     }
-  }
-
-  async showPokemon(request: Request, response: Response) {
-    const { id } = request.params;
-    PokemonController.validateId(response, id);
 
     try {
       const pokemon = await Pokemon.show(id);
 
       if (!pokemon) {
-        response.status(404).json({
+        return response.status(404).json({
           errors: [
             {
               message: `Pokemon not found`,
@@ -57,13 +61,23 @@ class PokemonController {
             },
           ],
         });
-        return;
       }
 
-      response.status(200).json({ pokemon });
+      return response.status(200).json({ pokemon });
     } catch (error) {
-      response.status(400).json({ error });
+      return response.status(400).json({ error });
     }
+  }
+
+  static areObjectsEqual(objectA: any, ObjectB: any) {
+    const defaultProps = PokemonController.DEFAULT_PROPS;
+
+    for (var i = 0; i < defaultProps.length; i++) {
+      var propName = defaultProps[i];
+
+      if (objectA[propName] !== ObjectB[propName]) return false;
+    }
+    return true;
   }
 
   async createPokemon(request: Request, response: Response) {
@@ -75,21 +89,89 @@ class PokemonController {
       const { errors } = pokemon;
 
       if (errors.length > 0) {
-        response.status(400).json({ errors });
-        return;
+        return response.status(400).json({ errors });
       }
 
-      response.status(200).json({ message: "Pokemon created successfully" });
+      return response
+        .status(200)
+        .json({ message: "Pokemon created successfully" });
     } catch (error) {
-      response.status(400).json({ error });
+      return response.status(400).json({ error });
     }
   }
 
-  static editPokemon(request: Request, response: Response) {
-    const { id } = request.body;
+  async updatePokemon(request: Request, response: Response) {
+    const { id } = request.params;
+
+    if (typeof id !== "string") {
+      return response.status(400).json({
+        errors: [
+          {
+            message: `Invalid Id`,
+            error: "Bad Request",
+            code: 400,
+          },
+        ],
+      });
+    }
+
+    if (!Boolean(id)) {
+      return response.status(400).json({
+        errors: [
+          {
+            message: `Id is required`,
+            error: "Bad Request",
+            code: 400,
+          },
+        ],
+      });
+    }
+
+    try {
+      const pokemon = await Pokemon.show(id);
+
+      if (!pokemon) {
+        return response.status(404).json({
+          errors: [
+            {
+              message: `Pokemon not found`,
+              error: "Not Found",
+              code: 404,
+            },
+          ],
+        });
+      }
+      const newPokemon = new Pokemon(request.body);
+
+      await newPokemon.update(id);
+
+      const { errors } = newPokemon;
+
+      if (errors.length > 0) {
+        return response.status(400).json({ errors });
+      }
+
+      if (PokemonController.areObjectsEqual(pokemon, newPokemon.pokemon)) {
+        return response.status(400).json({
+          errors: [
+            {
+              message: `No fields to change`,
+              error: "Bad request",
+              code: 400,
+            },
+          ],
+        });
+      }
+
+      return response
+        .status(200)
+        .json({ message: "Pokemon updated successfully" });
+    } catch (error) {
+      return response.status(400).json({ error });
+    }
   }
   static deletePokemon(request: Request, response: Response) {
-    const { id } = request.body;
+    const { id } = request.params;
   }
 }
 
