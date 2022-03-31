@@ -11,6 +11,17 @@ class PokemonController {
     "image",
   ];
 
+  static areObjectsEqual(objectA: any, ObjectB: any) {
+    const defaultProps = PokemonController.DEFAULT_PROPS;
+
+    for (var i = 0; i < defaultProps.length; i++) {
+      var propName = defaultProps[i];
+
+      if (objectA[propName] !== ObjectB[propName]) return false;
+    }
+    return true;
+  }
+
   async listPokemons(_request: Request, response: Response) {
     try {
       const pokemons = await Pokemon.list();
@@ -67,17 +78,6 @@ class PokemonController {
     } catch (error) {
       return response.status(400).json({ error });
     }
-  }
-
-  static areObjectsEqual(objectA: any, ObjectB: any) {
-    const defaultProps = PokemonController.DEFAULT_PROPS;
-
-    for (var i = 0; i < defaultProps.length; i++) {
-      var propName = defaultProps[i];
-
-      if (objectA[propName] !== ObjectB[propName]) return false;
-    }
-    return true;
   }
 
   async createPokemon(request: Request, response: Response) {
@@ -170,8 +170,56 @@ class PokemonController {
       return response.status(400).json({ error });
     }
   }
-  static deletePokemon(request: Request, response: Response) {
+
+  async deletePokemon(request: Request, response: Response) {
     const { id } = request.params;
+
+    if (typeof id !== "string") {
+      return response.status(400).json({
+        errors: [
+          {
+            message: `Invalid Id`,
+            error: "Bad Request",
+            code: 400,
+          },
+        ],
+      });
+    }
+
+    if (!Boolean(id)) {
+      return response.status(400).json({
+        errors: [
+          {
+            message: `Id is required`,
+            error: "Bad Request",
+            code: 400,
+          },
+        ],
+      });
+    }
+
+    try {
+      const pokemon = await Pokemon.show(id);
+
+      if (!pokemon) {
+        return response.status(404).json({
+          errors: [
+            {
+              message: `Pokemon not found`,
+              error: "Not Found",
+              code: 404,
+            },
+          ],
+        });
+      }
+      await Pokemon.delete(id);
+
+      return response
+        .status(200)
+        .json({ message: "Pokemon deleted successfully" });
+    } catch (error) {
+      return response.status(400).json({ error });
+    }
   }
 }
 

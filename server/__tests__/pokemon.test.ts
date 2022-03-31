@@ -153,3 +153,38 @@ describe("When update a Pokemon", () => {
     expect(response.statusCode).toBe(400);
   });
 });
+
+describe("When delete a Pokemon", () => {
+  it("should have successfully", async () => {
+    const pokemon = await new Pokemon(defaultPokemon).create();
+
+    const response = await request(app).delete(`/pokemon/${pokemon.id}`);
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  it("should return 404 when pokemon was not found", async () => {
+    const pokemon = await new Pokemon(defaultPokemon);
+    const newPokemon = await pokemon.create();
+    const pokemonId = newPokemon.id;
+    const deletedPokemon = await Pokemon.delete(pokemonId);
+
+    const response = await request(app).delete(`/pokemon/${deletedPokemon.id}`);
+
+    expect(response.statusCode).toBe(404);
+  });
+
+  it("should return 400 when has not valid id", async () => {
+    const fakeId = "fakeId";
+
+    const response = await request(app).delete(`/pokemon/${fakeId}`);
+
+    expect(response.statusCode).toBe(400);
+  });
+
+  it("should return 400 when has not an id", async () => {
+    const response = await request(app).delete(`/pokemon`);
+
+    expect(response.statusCode).toBe(400);
+  });
+});

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1648769585694" clover="3.2.0">
-  <project timestamp="1648769585694" name="All files">
-    <metrics statements="123" coveredstatements="116" conditionals="22" coveredconditionals="16" methods="21" coveredmethods="20" elements="166" coveredelements="152" complexity="0" loc="123" ncloc="123" packages="5" files="7" classes="7"/>
+<coverage generated="1648770618241" clover="3.2.0">
+  <project timestamp="1648770618242" name="All files">
+    <metrics statements="137" coveredstatements="130" conditionals="25" coveredconditionals="18" methods="21" coveredmethods="21" elements="183" coveredelements="169" complexity="0" loc="137" ncloc="137" packages="6" files="8" classes="8"/>
     <package name="src">
-      <metrics statements="37" coveredstatements="36" conditionals="6" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <metrics statements="37" coveredstatements="36" conditionals="6" coveredconditionals="4" methods="5" coveredmethods="5"/>
       <file name="app.ts" path="C:\Users\Kamila\Pessoal\whos_that_pokemon\server\src\app.ts">
         <metrics statements="17" coveredstatements="16" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
@@ -25,19 +25,19 @@
         <line num="40" count="2" type="stmt"/>
       </file>
       <file name="routes.ts" path="C:\Users\Kamila\Pessoal\whos_that_pokemon\server\src\routes.ts">
-        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
       </file>
       <file name="server.ts" path="C:\Users\Kamila\Pessoal\whos_that_pokemon\server\src\server.ts">
         <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
@@ -52,31 +52,31 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="50" coveredstatements="45" conditionals="10" coveredconditionals="8" methods="6" coveredmethods="5"/>
+      <metrics statements="61" coveredstatements="56" conditionals="13" coveredconditionals="10" methods="6" coveredmethods="6"/>
       <file name="PokemonController.ts" path="C:\Users\Kamila\Pessoal\whos_that_pokemon\server\src\controllers\PokemonController.ts">
-        <metrics statements="50" coveredstatements="45" conditionals="10" coveredconditionals="8" methods="6" coveredmethods="5"/>
+        <metrics statements="61" coveredstatements="56" conditionals="13" coveredconditionals="10" methods="6" coveredmethods="6"/>
         <line num="2" count="2" type="stmt"/>
         <line num="5" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="27" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="39" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="51" count="3" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
-        <line num="54" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="55" count="1" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="7" type="stmt"/>
+        <line num="20" count="7" type="cond" truecount="1" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="4" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="50" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="63" count="3" type="stmt"/>
+        <line num="65" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="66" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="73" count="2" type="stmt"/>
-        <line num="75" count="2" type="stmt"/>
-        <line num="76" count="7" type="stmt"/>
-        <line num="78" count="7" type="cond" truecount="1" falsecount="0"/>
-        <line num="80" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
         <line num="84" count="2" type="stmt"/>
         <line num="85" count="2" type="stmt"/>
         <line num="87" count="2" type="stmt"/>
@@ -103,8 +103,19 @@
         <line num="155" count="1" type="stmt"/>
         <line num="166" count="1" type="stmt"/>
         <line num="170" count="1" type="stmt"/>
-        <line num="174" count="0" type="stmt"/>
-        <line num="178" count="2" type="stmt"/>
+        <line num="175" count="4" type="stmt"/>
+        <line num="177" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="178" count="1" type="stmt"/>
+        <line num="189" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="190" count="0" type="stmt"/>
+        <line num="201" count="3" type="stmt"/>
+        <line num="202" count="3" type="stmt"/>
+        <line num="204" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="205" count="1" type="stmt"/>
+        <line num="215" count="1" type="stmt"/>
+        <line num="217" count="1" type="stmt"/>
+        <line num="221" count="1" type="stmt"/>
+        <line num="226" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.database">
@@ -118,40 +129,49 @@
         <line num="10" count="2" type="stmt"/>
       </file>
     </package>
+    <package name="src.middlewares">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="initialRoute.ts" path="C:\Users\Kamila\Pessoal\whos_that_pokemon\server\src\middlewares\initialRoute.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+      </file>
+    </package>
     <package name="src.models">
       <metrics statements="31" coveredstatements="30" conditionals="4" coveredconditionals="3" methods="9" coveredmethods="9"/>
       <file name="Pokemon.ts" path="C:\Users\Kamila\Pessoal\whos_that_pokemon\server\src\models\Pokemon.ts">
         <metrics statements="31" coveredstatements="30" conditionals="4" coveredconditionals="3" methods="9" coveredmethods="9"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="16" count="686" type="stmt"/>
-        <line num="17" count="686" type="stmt"/>
-        <line num="18" count="686" type="stmt"/>
+        <line num="16" count="718" type="stmt"/>
+        <line num="17" count="718" type="stmt"/>
+        <line num="18" count="718" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
-        <line num="32" count="11" type="stmt"/>
-        <line num="33" count="11" type="stmt"/>
-        <line num="34" count="11" type="stmt"/>
-        <line num="38" count="11" type="stmt"/>
-        <line num="39" count="55" type="cond" truecount="0" falsecount="1"/>
+        <line num="32" count="13" type="stmt"/>
+        <line num="33" count="13" type="stmt"/>
+        <line num="34" count="13" type="stmt"/>
+        <line num="38" count="13" type="stmt"/>
+        <line num="39" count="65" type="cond" truecount="0" falsecount="1"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="43" count="11" type="stmt"/>
-        <line num="53" count="11" type="stmt"/>
-        <line num="55" count="11" type="stmt"/>
-        <line num="56" count="55" type="cond" truecount="1" falsecount="0"/>
+        <line num="43" count="13" type="stmt"/>
+        <line num="53" count="13" type="stmt"/>
+        <line num="55" count="13" type="stmt"/>
+        <line num="56" count="65" type="cond" truecount="1" falsecount="0"/>
         <line num="57" count="2" type="stmt"/>
-        <line num="67" count="8" type="stmt"/>
-        <line num="69" count="8" type="cond" truecount="1" falsecount="0"/>
-        <line num="71" count="7" type="stmt"/>
-        <line num="73" count="7" type="stmt"/>
+        <line num="67" count="10" type="stmt"/>
+        <line num="69" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="71" count="9" type="stmt"/>
+        <line num="73" count="9" type="stmt"/>
         <line num="77" count="2" type="stmt"/>
         <line num="78" count="2" type="stmt"/>
-        <line num="82" count="8" type="stmt"/>
-        <line num="83" count="6" type="stmt"/>
+        <line num="82" count="11" type="stmt"/>
+        <line num="83" count="8" type="stmt"/>
         <line num="87" count="3" type="stmt"/>
         <line num="89" count="3" type="cond" truecount="1" falsecount="0"/>
         <line num="91" count="2" type="stmt"/>
-        <line num="97" count="2" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
+        <line num="97" count="4" type="stmt"/>
+        <line num="98" count="4" type="stmt"/>
         <line num="102" count="2" type="stmt"/>
       </file>
     </package>
