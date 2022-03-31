@@ -40,8 +40,19 @@ describe("When getting a Pokemon", () => {
     );
   });
 
+  it("should return 404 when pokemon was not found", async () => {
+    const pokemon = await new Pokemon(defaultPokemon);
+    const newPokemon = await pokemon.create();
+    const pokemonId = newPokemon.id;
+    const deletedPokemon = await Pokemon.delete(pokemonId);
+
+    const response = await request(app).get(`/pokemon/${deletedPokemon.id}`);
+
+    expect(response.statusCode).toBe(404);
+  });
+
   it("should return 400 when has not valid id", async () => {
-    const fakeId = "invalid400";
+    const fakeId = "fakeId";
 
     const response = await request(app).get(`/pokemon/${fakeId}`);
 
@@ -52,5 +63,23 @@ describe("When getting a Pokemon", () => {
     const response = await request(app).get(`/pokemon`);
 
     expect(response.statusCode).toBe(400);
+  });
+});
+
+describe("When getting all Pokemons", () => {
+  it("should show all pokemons", async () => {
+    const pokemon = await new Pokemon(defaultPokemon).create();
+
+    const response = await request(app).get(`/pokemons`);
+
+    const { pokemons } = response.body;
+
+    expect(response.statusCode).toBe(200);
+
+    // expect(pokemons[0]).toBeCalledWith(
+    //   expect.objectContaining({
+    //     name: expect.any(String),
+    //   })
+    // );
   });
 });

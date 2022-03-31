@@ -3,8 +3,14 @@ import Pokemon from "../models/Pokemon";
 
 class PokemonController {
   constructor() {}
-  static ListAllPokemons(_request: Request, response: Response) {
-    //response.send("pokemon", { pokemon: {} });
+  async listPokemons(_request: Request, response: Response) {
+    try {
+      const pokemons = await Pokemon.list();
+
+      response.status(200).json({ pokemons });
+    } catch (error) {
+      response.status(400).json({ error });
+    }
   }
 
   static validateId(response: Response, id: string) {
@@ -41,9 +47,22 @@ class PokemonController {
     try {
       const pokemon = await Pokemon.show(id);
 
+      if (!pokemon) {
+        response.status(404).json({
+          errors: [
+            {
+              message: `Pokemon not found`,
+              error: "Not Found",
+              code: 404,
+            },
+          ],
+        });
+        return;
+      }
+
       response.status(200).json({ pokemon });
     } catch (error) {
-      response.status(400).json({ errors: [error] });
+      response.status(400).json({ error });
     }
   }
 
@@ -62,7 +81,7 @@ class PokemonController {
 
       response.status(200).json({ message: "Pokemon created successfully" });
     } catch (error) {
-      response.status(400).json({ errors: [{ ...error }] });
+      response.status(400).json({ error });
     }
   }
 

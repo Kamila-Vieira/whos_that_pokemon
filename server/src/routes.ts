@@ -12,5 +12,6 @@ routes.get("/", (_request: Request, response: Response) => {
 
 routes.post("/pokemon", pokemonController.createPokemon);
 routes.get("/pokemon/:id?", pokemonController.showPokemon);
+routes.get("/pokemons", pokemonController.listPokemons);
 
 export default routes;
