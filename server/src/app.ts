@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import routes from "./routes";
 import { config } from "dotenv";
-import dbConnection from "./database";
+import connection from "./database";
 
 config({
   path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
@@ -23,12 +23,13 @@ class App {
     this.express.use(express.urlencoded({ extended: true }));
   }
 
-  connection() {
-    dbConnection
-      .then(() => {
-        this.express.emit("dbConnected");
-      })
-      .catch((e) => console.log(e));
+  async connection() {
+    try {
+      await connection;
+      this.express.emit("dbConnected");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   routes() {

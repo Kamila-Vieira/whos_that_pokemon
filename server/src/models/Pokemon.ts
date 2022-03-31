@@ -1,30 +1,32 @@
 import mongoose from "mongoose";
 
-type PokemonModel = {
-  name: string;
-  type1: string;
-  type2: string;
-  height: string;
-  width: string;
-};
-const Schema = mongoose.Schema;
-
-const pokemonSchema = new Schema({
-  name: { type: String, required: true },
-  type1: { type: String, required: true },
-  type2: { type: String, required: true },
-  height: { type: String, required: true },
-  width: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-  image: String,
-});
+const pokemonSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    type1: { type: String, required: true },
+    type2: { type: String, required: true },
+    height: { type: String, required: true },
+    width: { type: String, required: true },
+    image: { type: String, required: false },
+    createdAt: { type: Date, default: Date.now },
+  },
+  {
+    toJSON: {
+      transform: (_, ret): void => {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+      },
+    },
+  }
+);
 
 const pokemonModel = mongoose.model("Pokemon", pokemonSchema);
 
 class Pokemon {
   body: PokemonModel;
   pokemon: PokemonModel | null;
-  errors: string[];
+  errors: ErrorBody[];
 
   constructor(body: PokemonModel) {
     this.body = body;
@@ -52,23 +54,38 @@ class Pokemon {
 
     for (const key in this.body) {
       if (!this.body[key as keyof PokemonModel]) {
-        this.errors.push(`Field '${key}' is required`);
+        this.errors.push({
+          message: `Field '${key}' is required`,
+          error: "Bad Request",
+          code: 400,
+        });
       }
     }
   }
 
-  async createPokemon() {
+  async create() {
     this.validFields();
 
     if (this.errors.length > 0) return;
 
     this.pokemon = await pokemonModel.create(this.body);
+
+    return this.pokemon;
   }
 
-  async updatePokemon(id: string) {
-    if (typeof id !== "string") return;
+  static async list() {
+    const pokemons = await pokemonModel.find().sort({ createdAt: -1 });
+    return pokemons;
+  }
 
+  static async show(id: string) {
+    const pokemon = await pokemonModel.findById(id);
+    return pokemon;
+  }
+
+  async update(id: string) {
     this.validFields();
+
     if (this.errors.length > 0) return;
 
     this.pokemon = await pokemonModel.findByIdAndUpdate(id, this.body, {
@@ -76,22 +93,8 @@ class Pokemon {
     });
   }
 
-  static async listAllPokemons() {
-    const pokemons = await pokemonModel.find().sort({ createdAt: -1 });
-    return pokemons;
-  }
-
-  static async findPokemonById(id: string) {
-    if (typeof id !== "string" || !id) return;
-
-    const pokemon = await pokemonModel.findById(id);
-    return pokemon;
-  }
-
-  static async deletePokemon(id: string) {
-    if (typeof id !== "string" || !id) return;
-
-    const pokemon = await pokemonModel.findOneAndDelete({ _id: id });
+  static async delete(id: string) {
+    const pokemon = await pokemonModel.findOneAndDelete({ id });
     return pokemon;
   }
 }
