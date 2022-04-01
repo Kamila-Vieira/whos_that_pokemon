@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import { PokemonModel, ErrorBody } from "../../typings/pokemon";
 
 const pokemonSchema = new Schema({
   name: { type: String, required: true, unique: true },

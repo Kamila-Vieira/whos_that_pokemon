@@ -1,4 +1,4 @@
-type PokemonModel = {
+export type PokemonModel = {
   id?: string;
   name: string;
   type1: string;
@@ -8,7 +8,7 @@ type PokemonModel = {
   image?: string;
 };
 
-type ErrorBody = {
+export type ErrorBody = {
   message: string;
   error: string;
   code: number;

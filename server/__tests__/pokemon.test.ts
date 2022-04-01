@@ -2,6 +2,7 @@ import Pokemon from "../src/models/Pokemon";
 import app from "../src/app";
 import request from "supertest";
 import mongoose from "mongoose";
+import { PokemonModel } from "../typings/pokemon";
 
 describe("When creating a Pokemon", () => {
   afterAll(() => {
