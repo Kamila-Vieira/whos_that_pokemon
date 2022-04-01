@@ -2,33 +2,18 @@ import { Request, Response } from "express";
 import Pokemon from "../models/Pokemon";
 
 class PokemonController {
-  static DEFAULT_PROPS: string[] = [
-    "name",
-    "type1",
-    "type2",
-    "width",
-    "height",
-    "image",
-  ];
-
-  static areObjectsEqual(objectA: any, ObjectB: any) {
-    const defaultProps = PokemonController.DEFAULT_PROPS;
-
-    for (var i = 0; i < defaultProps.length; i++) {
-      var propName = defaultProps[i];
-
-      if (objectA[propName] !== ObjectB[propName]) return false;
-    }
-    return true;
-  }
-
   async listPokemons(_request: Request, response: Response) {
     try {
       const pokemons = await Pokemon.list();
 
       return response.status(200).json({ pokemons });
     } catch (error) {
-      return response.status(400).json({ error });
+      const throwError = new Error(error);
+      return response.status(400).json({
+        message: throwError.message,
+        error: throwError.name,
+        code: 400,
+      });
     }
   }
 
@@ -76,7 +61,12 @@ class PokemonController {
 
       return response.status(200).json({ pokemon });
     } catch (error) {
-      return response.status(400).json({ error });
+      const throwError = new Error(error);
+      return response.status(400).json({
+        message: throwError.message,
+        error: throwError.name,
+        code: 400,
+      });
     }
   }
 
@@ -96,7 +86,12 @@ class PokemonController {
         .status(200)
         .json({ message: "Pokemon created successfully" });
     } catch (error) {
-      return response.status(400).json({ error });
+      const throwError = new Error(error);
+      return response.status(400).json({
+        message: throwError.message,
+        error: throwError.name,
+        code: 400,
+      });
     }
   }
 
@@ -128,6 +123,8 @@ class PokemonController {
     }
 
     try {
+      const newPokemon = new Pokemon(request.body);
+
       const pokemon = await Pokemon.show(id);
 
       if (!pokemon) {
@@ -141,7 +138,6 @@ class PokemonController {
           ],
         });
       }
-      const newPokemon = new Pokemon(request.body);
 
       await newPokemon.update(id);
 
@@ -151,23 +147,16 @@ class PokemonController {
         return response.status(400).json({ errors });
       }
 
-      if (PokemonController.areObjectsEqual(pokemon, newPokemon.pokemon)) {
-        return response.status(400).json({
-          errors: [
-            {
-              message: `No fields to change`,
-              error: "Bad request",
-              code: 400,
-            },
-          ],
-        });
-      }
-
       return response
         .status(200)
         .json({ message: "Pokemon updated successfully" });
     } catch (error) {
-      return response.status(400).json({ error });
+      const throwError = new Error(error);
+      return response.status(400).json({
+        message: throwError.message,
+        error: throwError.name,
+        code: 400,
+      });
     }
   }
 
@@ -212,13 +201,19 @@ class PokemonController {
           ],
         });
       }
+
       await Pokemon.delete(id);
 
       return response
         .status(200)
         .json({ message: "Pokemon deleted successfully" });
     } catch (error) {
-      return response.status(400).json({ error });
+      const throwError = new Error(error);
+      return response.status(400).json({
+        message: throwError.message,
+        error: throwError.name,
+        code: 400,
+      });
     }
   }
 }
