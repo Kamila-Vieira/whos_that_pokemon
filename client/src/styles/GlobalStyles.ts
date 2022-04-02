@@ -26,10 +26,8 @@ export default createGlobalStyle`
 
 export const Container = styled.section`
   max-width: 1220px;
-  margin: 0 auto;
-  padding: 15px;
-  width: 100%;
+  margin: 10px auto;
   @media (max-width: 1220px) {
-    margin: 0 15px;
+    padding: 0 15px;
   }
 `;
