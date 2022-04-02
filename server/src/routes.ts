@@ -1,6 +1,6 @@
-import express, { Router, Request, Response } from "express";
+import express, { Router } from "express";
 import Pokemon from "../src/controllers/PokemonController";
-import initialRoute from "./middlewares";
+import initialRoute from "./middlewares/initialRoute";
 
 const routes: Router = express.Router();
 const pokemonController = new Pokemon();

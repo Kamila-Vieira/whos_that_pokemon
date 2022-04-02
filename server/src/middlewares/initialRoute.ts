@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 const initialRoute = (_request: Request, response: Response) => {
   return response.status(200).json({
-    message: `Bem vindos(as) a API "Who's that pokemon?"`,
+    message: `Bem vindo(a) a API "Who's that pokemon?`,
     routes: [
       {
         description: "Mostrar um Pokemon",
