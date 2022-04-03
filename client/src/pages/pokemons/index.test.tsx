@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Pokemons from "./index";
+import Pokemons from ".";
 
 test("should render a pokemons page", () => {
   render(<Pokemons />);

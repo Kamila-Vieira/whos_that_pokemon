@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import { Container } from "../../styles/GlobalStyles";
+import { Container, MainTheme } from "../../styles/GlobalStyles";
 
-export { Container };
+export { Container, MainTheme };
 
 export const HeaderContainer = styled.header`
   padding: 20px;
-  background-color: rebeccapurple;
+  background-color: #fff;
+  border-bottom: 2px solid #ff0000;
 `;
 
 export const HeaderContent = styled.div`
@@ -15,17 +16,21 @@ export const HeaderContent = styled.div`
 
 export const Logo = styled.h1`
   margin-right: 30px;
+  color: #990000;
 `;
 
-export const Nav = styled.nav``;
+export const Nav = styled.nav`
+  .header-list {
+    display: flex;
+    align-items: center;
 
-export const List = styled.ul`
-  display: flex;
-  align-items: center;
+    .header-list-item {
+      margin: 0 10px;
+      color: #ff0000;
+    }
+  }
 `;
 
-export const ListItem = styled.li`
-  margin: 0 10px;
+export const LinkButton = styled.button`
+  color: inherit;
 `;
-
-export const ListItemLink = styled.a``;

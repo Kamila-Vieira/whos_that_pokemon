@@ -3,9 +3,8 @@ export type Pokemon = {
   name: string;
   type1: string;
   type2: string;
-  width: string;
+  weight: string;
   height: string;
-  image?: string;
 };
 
 export type Pokemons = {
