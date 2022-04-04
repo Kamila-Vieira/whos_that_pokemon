@@ -32,7 +32,7 @@ test("should render a form button submit", () => {
   expect(gameForm).toContainElement(gameFormSubmit);
 });
 
-test("should render a attempts content when is bigger than 0", () => {
+test("should render a attempts content when is higher  than 0", () => {
   const defaultContext: {
     gameState: GameState;
     setGameState: Dispatch<SetStateAction<GameState>>;
@@ -63,7 +63,7 @@ test("should render a attempts content when is bigger than 0", () => {
   );
 });
 
-test("should render a characteristic result when answers length is bigger than 0", () => {
+test("should render a characteristic result when answers length is higher than 0", () => {
   const defaultContext: {
     gameState: GameState;
     setGameState: Dispatch<SetStateAction<GameState>>;
@@ -72,7 +72,7 @@ test("should render a characteristic result when answers length is bigger than 0
       raffledPokemon: null,
       selectedPokemon: null,
       isLoading: false,
-      attempts: 0,
+      attempts: 1,
       state: "init",
       answers: [
         {

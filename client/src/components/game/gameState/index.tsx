@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { usePokemonContext } from "../../../context/PokemonContext";
 import { Spinner } from "../../../styles/GlobalStyles";
 import ButtonPlay from "../ButtonPlay";
+import ButtonRestart from "../ButtonRestart";
 import GameForm from "../GameForm";
 
 import { Container } from "./styles";
@@ -12,7 +13,7 @@ type Props = {
 
 const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
   const {
-    gameState: { isLoading },
+    gameState: { isLoading, raffledPokemon },
   } = usePokemonContext();
   return (
     <Container data-testid="game-state">
@@ -36,7 +37,10 @@ const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
             case "lost":
               return (
                 <div data-testid="state-lost" className="state-lost">
-                  state {gameState}
+                  <h3>
+                    You lost! The secret Pokémon was {raffledPokemon?.name}!
+                  </h3>
+                  <ButtonRestart text="Play again" />
                 </div>
               );
             default:

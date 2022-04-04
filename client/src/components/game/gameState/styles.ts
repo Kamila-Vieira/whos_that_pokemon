@@ -5,6 +5,9 @@ export const Container = styled.div`
   height: 100%;
   width: 100%;
   padding: 50px 0;
+  @media (max-width: 1024px) {
+    height: initial;
+  }
   .state-initial {
     display: flex;
     justify-content: center;
@@ -17,5 +20,15 @@ export const Container = styled.div`
   }
   .state-playing {
     height: 100%;
+    @media (max-width: 1024px) {
+      height: initial;
+    }
+  }
+  .state-lost {
+    display: flex;
+    flex-direction: column;
+    h3 {
+      margin-bottom: 20px;
+    }
   }
 `;

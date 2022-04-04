@@ -2,7 +2,7 @@ import { createContext, FunctionComponent, useContext, useState } from "react";
 import pokemonsList from "../mocks/pokemonsList";
 import { GameState, ContextProps } from "../typings/pokemons";
 
-const DEFAULT_VALUES: GameState = {
+export const DEFAULT_VALUES: GameState = {
   raffledPokemon: null,
   selectedPokemon: null,
   isLoading: false,

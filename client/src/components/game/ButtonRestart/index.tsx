@@ -1,5 +1,8 @@
 import { FunctionComponent, useState } from "react";
-import { usePokemonContext } from "../../../context/PokemonContext";
+import {
+  DEFAULT_VALUES,
+  usePokemonContext,
+} from "../../../context/PokemonContext";
 import defaults from "../../../mocks/defaults";
 import { ButtonSubmit } from "../../../styles/GlobalStyles";
 import { Pokemon } from "../../../typings/pokemons";
@@ -9,7 +12,7 @@ type Props = {
   text?: string;
 };
 
-const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
+const ButtonRestart: FunctionComponent<Props> = ({ text = "Play" }) => {
   const { gameState, setGameState } = usePokemonContext();
 
   const handlerClick = () => {
@@ -18,24 +21,13 @@ const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
       isLoading: true,
     });
     setTimeout(() => {
-      setGameState({
-        ...gameState,
-        isLoading: false,
-        state: "playing",
-        raffledPokemon: drawPokemon(gameState.allPokemons),
-      });
+      setGameState(DEFAULT_VALUES);
     }, defaults.LOADING_TIMEOUT);
-  };
-
-  const drawPokemon = (pokemonList: Pokemon[]) => {
-    const limitRandom = pokemonList.length;
-    const pokemonIndex = helpers.generateRandomNumber(limitRandom);
-    return pokemonList[pokemonIndex];
   };
 
   return (
     <ButtonSubmit
-      data-testid="game-play"
+      data-testid="game-restart"
       buttonWidth="200px"
       buttonHeight="70px"
       buttonFont="25px"
@@ -46,4 +38,4 @@ const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
   );
 };
 
-export default ButtonPlay;
+export default ButtonRestart;
