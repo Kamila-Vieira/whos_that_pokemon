@@ -1,12 +1,16 @@
 import { FunctionComponent } from "react";
 import PokemonsList from "../../components/Pokemons/PokemonsList";
 import { Container } from "../../styles/GlobalStyles";
-import pokemonsList from "../../mocks/pokemonsList";
+import { usePokemonContext } from "../../context/PokemonContext";
 
 const Pokemons: FunctionComponent = () => {
+  const {
+    gameState: { allPokemons },
+  } = usePokemonContext();
+
   return (
     <Container data-testid="app-pokemons">
-      <PokemonsList pokemons={pokemonsList} />
+      <PokemonsList pokemons={allPokemons} />
     </Container>
   );
 };

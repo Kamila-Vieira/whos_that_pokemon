@@ -1,5 +1,11 @@
-import { createContext, FunctionComponent, useContext, useState } from "react";
-import pokemonsList from "../mocks/pokemonsList";
+import {
+  createContext,
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import Api from "../services/api";
 import { GameState, ContextProps } from "../typings/pokemons";
 
 export const DEFAULT_VALUES: GameState = {
@@ -9,7 +15,7 @@ export const DEFAULT_VALUES: GameState = {
   attempts: 0,
   state: "init",
   answers: [],
-  allPokemons: pokemonsList,
+  allPokemons: [],
 };
 
 export const PokemonContext = createContext<ContextProps>({
@@ -19,6 +25,13 @@ export const PokemonContext = createContext<ContextProps>({
 
 export const PokemonContextProvider: FunctionComponent = ({ children }) => {
   const [gameState, setGameState] = useState<GameState>(DEFAULT_VALUES);
+
+  useEffect(() => {
+    (async () => {
+      const allPokemons = await Api.getAllPokemons();
+      setGameState({ ...gameState, allPokemons });
+    })();
+  }, []);
 
   return (
     <PokemonContext.Provider value={{ gameState, setGameState }}>

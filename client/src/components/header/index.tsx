@@ -33,7 +33,7 @@ const Header: FunctionComponent = () => {
                 to="/"
                 as={Link}
               >
-                Game
+                Jogar
               </LinkButton>
             </li>
             <li data-testid="header-list-item" className="header-list-item">
@@ -44,7 +44,7 @@ const Header: FunctionComponent = () => {
                 title="Pokemons"
                 as={Link}
               >
-                List of Pokemons
+                Lista de Pokemons
               </LinkButton>
             </li>
           </ul>

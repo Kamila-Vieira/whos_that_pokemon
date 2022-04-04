@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import { usePokemonContext } from "../../../context/PokemonContext";
 import defaults from "../../../mocks/defaults";
 import { ButtonSubmit } from "../../../styles/GlobalStyles";

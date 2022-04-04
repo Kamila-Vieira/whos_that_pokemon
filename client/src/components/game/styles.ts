@@ -5,6 +5,7 @@ export const Container = styled.section`
   grid-template-columns: 1fr 1fr;
   column-gap: 40px;
   height: 100%;
+  margin-top: 110px;
 
   @media (max-width: 1024px) {
     display: flex;

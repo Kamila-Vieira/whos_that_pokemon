@@ -32,7 +32,7 @@ test("should render a attempts content when is higher than 0", () => {
   const gameFormAttempts = screen.getByTestId("form-attempts-content");
   expect(gameFormResults).toContainElement(gameFormAttempts);
   expect(gameFormAttempts).toHaveTextContent(
-    `Attempts: ${defaultContext.gameState.attempts}`
+    `Tentativas: ${defaultContext.gameState.attempts}`
   );
 });
 

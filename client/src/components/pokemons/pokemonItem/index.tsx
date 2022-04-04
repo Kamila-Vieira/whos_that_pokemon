@@ -1,31 +1,16 @@
-import { FunctionComponent, useState, MouseEvent } from "react";
-
-import { Pokemon as PokemonProps } from "../../../typings/pokemons";
-import { Container, Delete, Update } from "./styles";
+import { FunctionComponent } from "react";
+import { Pokemon } from "../../../typings/pokemons";
+import { Container } from "./styles";
 
 type Props = {
-  pokemon: PokemonProps;
+  pokemon: Pokemon;
 };
 
 const PokemonItem: FunctionComponent<Props> = ({ pokemon }) => {
   const { _id, name, type1, type2, height, weight } = pokemon;
-  const [updating, setUpdating] = useState(false);
-
-  const handlerClickDelete = (e: MouseEvent<HTMLButtonElement>) => {
-    const pokemonId = e.currentTarget.dataset.id;
-    console.log(pokemonId);
-  };
-
-  const handlerClickUpdate = (e: MouseEvent<HTMLButtonElement>) => {
-    const pokemonId = e.currentTarget.dataset.id;
-    console.log(pokemonId);
-    setUpdating(true);
-  };
-
-  console.log("...updating: ", _id, " => ", updating);
 
   return (
-    <Container data-testid="pokemon-card">
+    <Container data-testid="pokemon-card" data-id={_id}>
       <div className="pokemon-card-data">
         <label data-testid="pokemon-name" className="pokemon-field">
           <b>Name: </b>
@@ -47,23 +32,6 @@ const PokemonItem: FunctionComponent<Props> = ({ pokemon }) => {
           <b>Weight: </b>
           <input type="text" value={weight} id="weight" disabled />
         </label>
-      </div>
-      <div data-testid="pokemon-card-buttons" className="pokemon-card-buttons">
-        <Update
-          data-id={_id}
-          onClick={handlerClickUpdate}
-          updating={updating}
-          data-testid="pokemon-update"
-        >
-          {updating ? "Save" : "Edit"}
-        </Update>
-        <Delete
-          data-id={_id}
-          onClick={handlerClickDelete}
-          data-testid="pokemon-delete"
-        >
-          Deletar
-        </Delete>
       </div>
     </Container>
   );

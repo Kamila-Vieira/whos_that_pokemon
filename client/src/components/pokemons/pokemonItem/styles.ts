@@ -9,9 +9,8 @@ export const Container = styled.div`
   transition: all 0.3s ease-out;
   .pokemon-card-data {
     .pokemon-field {
-      /* display: flex;
-      align-items: center; */
       & input {
+        text-transform: capitalize;
         width: 100%;
         background-color: transparent;
         border: none;
@@ -21,5 +20,3 @@ export const Container = styled.div`
     }
   }
 `;
-export const Update = styled.button<{ updating: boolean }>``;
-export const Delete = styled.button``;

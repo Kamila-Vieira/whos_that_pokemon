@@ -17,7 +17,7 @@ test("should render a autocomplete input", () => {
   expect(gameFormAutocomplete).toContainElement(gameFormAutocompleteInput);
 });
 
-test("should render autocomplete list if has results", async () => {
+test("should render autocomplete list if has results", () => {
   render(<Autocomplete pokemons={pokemonsList} />);
   const gameFormAutocomplete = screen.getByTestId("game-form-autocomplete");
   const gameFormAutocompleteInput = screen.getByTestId(
@@ -31,7 +31,7 @@ test("should render autocomplete list if has results", async () => {
   expect(gameFormAutocomplete).toContainElement(gameFormAutocompleteContent);
 });
 
-test("should render autocomplete empty text if not has results", async () => {
+test("should render autocomplete empty text if not has results", () => {
   render(<Autocomplete pokemons={[]} />);
   const gameFormAutocomplete = screen.getByTestId("game-form-autocomplete");
   const gameFormAutocompleteInput = screen.getByTestId(

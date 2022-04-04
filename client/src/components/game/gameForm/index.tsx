@@ -15,10 +15,6 @@ const GameForm: FunctionComponent = () => {
   const { allPokemons, selectedPokemon, attempts, answers, raffledPokemon } =
     gameState;
 
-  console.log(raffledPokemon);
-  console.log(selectedPokemon);
-  console.log("answers", answers);
-
   const handlerSubmit = (e: MouseEvent) => {
     e.preventDefault();
 

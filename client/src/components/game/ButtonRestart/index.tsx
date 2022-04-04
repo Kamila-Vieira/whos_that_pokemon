@@ -1,10 +1,12 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import {
   DEFAULT_VALUES,
   usePokemonContext,
 } from "../../../context/PokemonContext";
 import defaults from "../../../mocks/defaults";
+import Api from "../../../services/api";
 import { ButtonSubmit } from "../../../styles/GlobalStyles";
+import { Pokemon } from "../../../typings/pokemons";
 
 type Props = {
   text?: string;
@@ -12,6 +14,14 @@ type Props = {
 
 const ButtonRestart: FunctionComponent<Props> = ({ text = "Play again" }) => {
   const { gameState, setGameState } = usePokemonContext();
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const allPokemons = await Api.getAllPokemons();
+      setPokemons(allPokemons);
+    })();
+  }, []);
 
   const handlerClick = () => {
     setGameState({
@@ -19,7 +29,7 @@ const ButtonRestart: FunctionComponent<Props> = ({ text = "Play again" }) => {
       isLoading: true,
     });
     setTimeout(() => {
-      setGameState(DEFAULT_VALUES);
+      setGameState({ ...DEFAULT_VALUES, allPokemons: pokemons });
     }, defaults.LOADING_TIMEOUT);
   };
 

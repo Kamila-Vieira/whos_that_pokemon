@@ -16,6 +16,7 @@ const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
   const {
     gameState: { isLoading, raffledPokemon },
   } = usePokemonContext();
+
   return (
     <Container data-testid="game-state">
       {isLoading ? (

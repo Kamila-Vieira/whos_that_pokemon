@@ -29,15 +29,3 @@ test("each card should render props fields unless prop _id", () => {
     }
   }
 });
-
-test("should render a delete button", () => {
-  render(<PokemonItem pokemon={pokemonTest} />);
-  const pokemonDelete = screen.getByTestId("pokemon-delete");
-  expect(pokemonDelete).toBeInTheDocument();
-});
-
-test("should render a update button", () => {
-  render(<PokemonItem pokemon={pokemonTest} />);
-  const pokemonUpdate = screen.getByTestId("pokemon-update");
-  expect(pokemonUpdate).toBeInTheDocument();
-});

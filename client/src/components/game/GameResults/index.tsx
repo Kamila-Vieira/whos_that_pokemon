@@ -17,7 +17,7 @@ const GameResults: FunctionComponent = () => {
           data-testid="form-attempts-content"
           className="form-attempts-content"
         >
-          <h4>Attempts: {attempts}</h4>
+          <h4>Tentativas: {attempts}</h4>
         </div>
       )}
       {answers.length > 0 && (
@@ -28,8 +28,8 @@ const GameResults: FunctionComponent = () => {
           <CharacteristicsTable data-testid="form-characteristics-table">
             <thead>
               <tr>
-                <th>Characteristic</th>
-                <th>Result</th>
+                <th>Caracteristica</th>
+                <th>Resultado</th>
               </tr>
             </thead>
             <tbody>

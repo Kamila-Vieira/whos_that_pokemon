@@ -5,6 +5,7 @@ import routes from "./routes";
 import connection from "./database";
 import initSupply from "./middlewares/initSupply";
 import { PokemonModel } from "../typings/pokemon";
+import mongoose from "mongoose";
 
 config({
   path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
@@ -42,6 +43,7 @@ class App {
 
   insertSupply(insert = true) {
     if (!insert) return;
+    mongoose.connection.dropCollection(process.env.COLLECTION_NAME);
     this.express.on("dbConnected", async () => {
       const pokemons = await initSupply(!insert);
       pokemons.forEach(async (pokemon: PokemonModel) => {
@@ -49,7 +51,7 @@ class App {
           await axios({
             url: `/pokemon`,
             method: "POST",
-            baseURL: `${process.env.HOSTNAME}:${process.env.PORT}`,
+            baseURL: `${process.env.HOST}:${process.env.PORT}`,
             data: JSON.parse(JSON.stringify(pokemon)),
           });
           console.log({
