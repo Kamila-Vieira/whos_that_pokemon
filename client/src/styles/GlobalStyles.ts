@@ -57,6 +57,7 @@ export const Spinner = styled.div<{
 export const Container = styled.main`
   max-width: 1220px;
   margin: 10px auto;
+  height: calc(100vh - 110px);
   @media (max-width: 1220px) {
     padding: 0 15px;
   }
@@ -71,8 +72,9 @@ export const ButtonSubmit = styled.button<{
   &:hover {
     border-color: #000;
     color: #ff0000;
+    box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
   }
-  transition: color 0.4s, border-color 0.4s;
+  transition: color 0.4s, border-color 0.4s, box-shadow 0.4s;
   width: ${({ buttonWidth }) => (buttonWidth ? buttonWidth : "120px")};
   height: ${({ buttonHeight }) => (buttonHeight ? buttonHeight : "42px")};
   border: 1px solid ${(props) => (props.isLoading ? "#ccc" : "#ff0000")};

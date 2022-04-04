@@ -1,7 +1,7 @@
 import { Route, Routes as BrowserRoutes } from "react-router-dom";
 
-import Home from "./pages/home";
-import Pokemons from "./pages/pokemons";
+import Home from "./pages/Home";
+import Pokemons from "./pages/Pokemons";
 
 function Routes() {
   return (

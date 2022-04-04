@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { Container, MainTheme } from "../../styles/GlobalStyles";
-
-export { Container, MainTheme };
 
 export const HeaderContainer = styled.header`
   padding: 20px;
@@ -12,6 +9,12 @@ export const HeaderContainer = styled.header`
 export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
+
+  max-width: 1220px;
+  margin: 10px auto;
+  @media (max-width: 1220px) {
+    padding: 0 15px;
+  }
 `;
 
 export const Logo = styled.h1`

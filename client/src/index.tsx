@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes";
 import GlobalStyles from "./styles/GlobalStyles";
 import Header from "./components/Header";
+import { PokemonContextProvider } from "./context/PokemonContext";
 const rootElement = document.getElementById("root");
 
 if (!rootElement) throw new Error("Failed to find the root element");
@@ -16,7 +17,9 @@ const App = () => {
       <Router>
         <GlobalStyles />
         <Header />
-        <Routes />
+        <PokemonContextProvider>
+          <Routes />
+        </PokemonContextProvider>
       </Router>
     </StrictMode>
   );

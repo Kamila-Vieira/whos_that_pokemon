@@ -23,17 +23,28 @@ const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
           switch (gameState) {
             case "playing":
               return (
-                <div data-testid="state-playing">
+                <div data-testid="state-playing" className="state-playing">
                   <GameForm />
                 </div>
               );
             case "won":
-              return <div data-testid="state-won">state {gameState}</div>;
+              return (
+                <div data-testid="state-won" className="state-won">
+                  state {gameState}
+                </div>
+              );
             case "lost":
-              return <div data-testid="state-lost">state {gameState}</div>;
+              return (
+                <div data-testid="state-lost" className="state-lost">
+                  state {gameState}
+                </div>
+              );
             default:
               return (
-                <div data-testid="state-initial">
+                <div data-testid="state-initial" className="state-initial">
+                  <h3 className="state-initial-title">
+                    Clique no botão abaixo para iniciar o jogo
+                  </h3>
                   <ButtonPlay />
                 </div>
               );

@@ -8,24 +8,19 @@ type Props = {
 };
 
 const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { gameState, setGameState } = usePokemonContext();
 
   const handlerClick = () => {
-    setIsLoading(true);
+    setGameState({
+      ...gameState,
+      isLoading: true,
+    });
     setTimeout(() => {
-      setIsLoading(false);
       setGameState({
         ...gameState,
-        isLoading: true,
+        isLoading: false,
+        state: "playing",
       });
-      setTimeout(() => {
-        setGameState({
-          ...gameState,
-          isLoading: false,
-          state: "playing",
-        });
-      }, defaults.LOADING_TIMEOUT);
     }, defaults.LOADING_TIMEOUT);
   };
 
@@ -36,7 +31,6 @@ const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
       buttonHeight="70px"
       buttonFont="25px"
       onClick={handlerClick}
-      isLoading={isLoading}
     >
       {text}
     </ButtonSubmit>

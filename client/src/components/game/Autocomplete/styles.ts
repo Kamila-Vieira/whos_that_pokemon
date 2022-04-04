@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  margin-right: 10px;
+`;
 
 export const InputAutocomplete = styled.input`
   height: 42px;
   border: 1px solid #990000;
-  margin-right: 5px;
+
   border-radius: 5px;
   padding: 0 11px;
   font-size: 14px;

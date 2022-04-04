@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
-import PokemonsList from "../../components/pokemons/PokemonsList";
-import { Container } from "./styles";
+import PokemonsList from "../../components/Pokemons/PokemonsList";
+import { Container } from "../../styles/GlobalStyles";
 import pokemonsList from "../../mocks/pokemonsList";
 
 const Pokemons: FunctionComponent = () => {
