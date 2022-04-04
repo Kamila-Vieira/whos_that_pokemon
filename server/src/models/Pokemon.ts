@@ -6,8 +6,7 @@ const pokemonSchema = new Schema({
   type1: { type: String, required: true },
   type2: { type: String, required: true },
   height: { type: String, required: true },
-  width: { type: String, required: true },
-  image: { type: String, required: false },
+  weight: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -22,7 +21,7 @@ class Pokemon {
     this.body = body;
     this.pokemon = null;
     this.errors = [];
-    this.DEFAULT_PROPS = ["name", "type1", "type2", "width", "height", "image"];
+    this.DEFAULT_PROPS = ["name", "type1", "type2", "weight", "height"];
   }
 
   clearBody() {
@@ -35,7 +34,7 @@ class Pokemon {
       name: this.body.name,
       type1: this.body.type1,
       type2: this.body.type2,
-      width: this.body.width,
+      weight: this.body.weight,
       height: this.body.height,
     };
   }
@@ -127,7 +126,7 @@ class Pokemon {
   }
 
   static async delete(id: string) {
-    const pokemon = await pokemonModel.findOneAndDelete({ id });
+    const pokemon = await pokemonModel.findOneAndDelete({ _id: id });
     return pokemon;
   }
 }

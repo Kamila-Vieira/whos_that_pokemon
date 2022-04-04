@@ -4,16 +4,17 @@ import request from "supertest";
 import mongoose from "mongoose";
 import { PokemonModel } from "../typings/pokemon";
 
+afterAll(() => {
+  mongoose.connection.dropCollection("pokemons");
+});
+
 describe("When creating a Pokemon", () => {
-  afterAll(() => {
-    mongoose.connection.dropCollection("pokemons");
-  });
   const defaultPokemon: PokemonModel = {
     name: "create",
     type1: "teste1",
     type2: "teste2",
     height: "20 cm",
-    width: "30 cm",
+    weight: "30 cm",
   };
 
   it("should created successfully", async () => {
@@ -38,16 +39,13 @@ describe("When creating a Pokemon", () => {
 });
 
 describe("When getting a Pokemon", () => {
-  afterAll(() => {
-    mongoose.connection.dropCollection("pokemons");
-  });
   it("should show a valid pokemon", async () => {
     const defaultPokemon: PokemonModel = {
       name: "getting",
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const pokemon = await new Pokemon(defaultPokemon).create();
@@ -66,13 +64,12 @@ describe("When getting a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const pokemon = await new Pokemon(defaultPokemon);
     const newPokemon = await pokemon.create();
-    const pokemonId = newPokemon.id;
-    const deletedPokemon = await Pokemon.delete(pokemonId);
+    const deletedPokemon = await Pokemon.delete(newPokemon.id);
 
     const response = await request(app).get(`/pokemon/${deletedPokemon.id}`);
 
@@ -95,33 +92,23 @@ describe("When getting a Pokemon", () => {
 });
 
 describe("When list Pokemons", () => {
-  afterAll(() => {
-    mongoose.connection.dropCollection("pokemons");
-  });
-
-  it("should show all pokemons", async () => {
+  beforeAll(async () => {
     await new Pokemon({
       name: "list",
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     }).create();
+  });
 
+  it("should show all pokemons", async () => {
     const response = await request(app).get(`/pokemons`);
 
     expect(response.statusCode).toBe(200);
   });
 
   it("should have valid objects", async () => {
-    await new Pokemon({
-      name: "list",
-      type1: "teste1",
-      type2: "teste2",
-      height: "20 cm",
-      width: "30 cm",
-    }).create();
-
     const response = await request(app).get(`/pokemons`);
 
     const { pokemons } = response.body;
@@ -134,24 +121,20 @@ describe("When list Pokemons", () => {
         type1: expect.any(String),
         type2: expect.any(String),
         height: expect.any(String),
-        width: expect.any(String),
+        weight: expect.any(String),
       })
     );
   });
 });
 
 describe("When update a Pokemon", () => {
-  afterAll(() => {
-    mongoose.connection.dropCollection("pokemons");
-  });
-
   it("should have successfully", async () => {
     const newPokemon: PokemonModel = {
       name: "successfully",
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const pokemon = await new Pokemon(newPokemon).create();
@@ -170,7 +153,7 @@ describe("When update a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const pokemon = await new Pokemon(pokemonError).create();
@@ -189,7 +172,7 @@ describe("When update a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
     const pokemon = await new Pokemon(pokemonError);
     const newPokemon = await pokemon.create();
@@ -211,7 +194,7 @@ describe("When update a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const response = await request(app)
@@ -227,7 +210,7 @@ describe("When update a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const response = await request(app).put(`/pokemon`).send(newPokemon);
@@ -241,7 +224,7 @@ describe("When update a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
     const pokemon = await new Pokemon(newPokemon).create();
 
@@ -254,16 +237,13 @@ describe("When update a Pokemon", () => {
 });
 
 describe("When delete a Pokemon", () => {
-  afterAll(() => {
-    mongoose.connection.dropCollection("pokemons");
-  });
   it("should have successfully", async () => {
     const newPokemon: PokemonModel = {
       name: "successfully",
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const pokemon = await new Pokemon(newPokemon).create();
@@ -279,7 +259,7 @@ describe("When delete a Pokemon", () => {
       type1: "teste1",
       type2: "teste2",
       height: "20 cm",
-      width: "30 cm",
+      weight: "30 cm",
     };
 
     const pokemon = await new Pokemon(defaultPokemon);

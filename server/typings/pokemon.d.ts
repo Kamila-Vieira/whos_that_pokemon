@@ -4,8 +4,7 @@ export type PokemonModel = {
   type1: string;
   type2: string;
   height: string;
-  width: string;
-  image?: string;
+  weight: string;
 };
 
 export type ErrorBody = {
