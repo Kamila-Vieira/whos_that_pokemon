@@ -21,3 +21,5 @@ export const Container = styled.div`
     }
   }
 `;
+export const Update = styled.button<{ updating: boolean }>``;
+export const Delete = styled.button``;

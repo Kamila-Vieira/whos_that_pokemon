@@ -4,8 +4,9 @@ import defaults from "../../../mocks/defaults";
 import { ButtonSubmit, Spinner } from "../../../styles/GlobalStyles";
 import helpers from "../../../utils/helpers";
 import Autocomplete from "../Autocomplete";
+import GameResults from "../GameResults";
 
-import { CharacteristicsTable, FormContainer, GameResults } from "./styles";
+import { FormContainer } from "./styles";
 
 const GameForm: FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,6 +16,9 @@ const GameForm: FunctionComponent = () => {
     gameState;
 
   console.log(raffledPokemon);
+  console.log(selectedPokemon);
+  console.log("answers", answers);
+
   const handlerSubmit = (e: MouseEvent) => {
     e.preventDefault();
 
@@ -61,24 +65,26 @@ const GameForm: FunctionComponent = () => {
         .map((value) => value.verification)
         .every((value) => value === "Right");
 
+      if (attempts === 4) {
+        setGameState({
+          ...gameState,
+          state: "lost",
+        });
+        return;
+      }
+
+      setGameState({
+        ...gameState,
+        attempts: attempts + 1,
+        answers: [...answers, attempVerification],
+      });
+
       if (isWinner) {
         setGameState({
           ...gameState,
           state: "won",
+          answers: [...answers, attempVerification],
         });
-      } else {
-        if (attempts + 1 === 5) {
-          setGameState({
-            ...gameState,
-            state: "lost",
-          });
-        } else {
-          setGameState({
-            ...gameState,
-            attempts: attempts + 1,
-            answers: [...answers, attempVerification],
-          });
-        }
       }
     }
   };
@@ -107,48 +113,7 @@ const GameForm: FunctionComponent = () => {
         </div>
       </FormContainer>
 
-      {isLoading ? (
-        <Spinner size="60px" />
-      ) : (
-        <GameResults data-testid="game-form-results">
-          {attempts === 4 && (
-            <h5>Pense bem na resposta, esta é a sua última tentativa!</h5>
-          )}
-          {attempts > 0 && (
-            <div
-              data-testid="form-attempts-content"
-              className="form-attempts-content"
-            >
-              <h4>Attempts: {attempts}</h4>
-            </div>
-          )}
-          {answers.length > 0 && (
-            <div
-              data-testid="form-characteristic-results"
-              className="form-characteristic-results"
-            >
-              <CharacteristicsTable data-testid="form-characteristics-table">
-                <thead>
-                  <tr>
-                    <th>Characteristic</th>
-                    <th>Result</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.entries(answers[attempts - 1]).map(([key, value]) => {
-                    return (
-                      <tr key={key}>
-                        <td>{key}</td>
-                        <td>{value.verification}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </CharacteristicsTable>
-            </div>
-          )}
-        </GameResults>
-      )}
+      {isLoading ? <Spinner size="60px" /> : <GameResults />}
     </>
   );
 };

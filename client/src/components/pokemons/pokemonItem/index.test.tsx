@@ -24,7 +24,20 @@ test("each card should render props fields unless prop _id", () => {
     propKey as keyof Pokemon;
     if (propKey !== "_id") {
       const pokemonPropTag = screen.getByTestId(`pokemon-${propKey}`);
+      // eslint-disable-next-line jest/no-conditional-expect
       expect(pokemonItem).toContainElement(pokemonPropTag);
     }
   }
+});
+
+test("should render a delete button", () => {
+  render(<PokemonItem pokemon={pokemonTest} />);
+  const pokemonDelete = screen.getByTestId("pokemon-delete");
+  expect(pokemonDelete).toBeInTheDocument();
+});
+
+test("should render a update button", () => {
+  render(<PokemonItem pokemon={pokemonTest} />);
+  const pokemonUpdate = screen.getByTestId("pokemon-update");
+  expect(pokemonUpdate).toBeInTheDocument();
 });

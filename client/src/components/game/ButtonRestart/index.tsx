@@ -1,18 +1,16 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import {
   DEFAULT_VALUES,
   usePokemonContext,
 } from "../../../context/PokemonContext";
 import defaults from "../../../mocks/defaults";
 import { ButtonSubmit } from "../../../styles/GlobalStyles";
-import { Pokemon } from "../../../typings/pokemons";
-import helpers from "../../../utils/helpers";
 
 type Props = {
   text?: string;
 };
 
-const ButtonRestart: FunctionComponent<Props> = ({ text = "Play" }) => {
+const ButtonRestart: FunctionComponent<Props> = ({ text = "Play again" }) => {
   const { gameState, setGameState } = usePokemonContext();
 
   const handlerClick = () => {

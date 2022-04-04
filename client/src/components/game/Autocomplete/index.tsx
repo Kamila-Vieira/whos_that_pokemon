@@ -1,7 +1,7 @@
 import {
   FunctionComponent,
   useState,
-  ChangeEvent,
+  FormEvent,
   MouseEvent,
   KeyboardEvent,
   useRef,
@@ -33,7 +33,7 @@ const Autocomplete: FunctionComponent<Props> = ({ pokemons }) => {
 
   const { gameState, setGameState } = usePokemonContext();
 
-  const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handlerInput = (e: FormEvent<HTMLInputElement>) => {
     const userInput = e.currentTarget.value;
 
     const filteredSuggestions = pokemons.filter(
@@ -48,10 +48,11 @@ const Autocomplete: FunctionComponent<Props> = ({ pokemons }) => {
   };
 
   const handlerClick = (e: MouseEvent<HTMLLIElement>) => {
-    setActiveSuggestionIndex(0);
+    const itemIndex = Number(e.currentTarget.dataset.index);
+    setActiveSuggestionIndex(itemIndex);
     setGameState({
       ...gameState,
-      selectedPokemon: suggestions[activeSuggestionIndex],
+      selectedPokemon: suggestions[itemIndex],
     });
     setSuggestions([]);
     setShowSuggestions(false);
@@ -106,6 +107,7 @@ const Autocomplete: FunctionComponent<Props> = ({ pokemons }) => {
             return (
               <Suggestion
                 isActive={isActive}
+                data-index={index}
                 className="autocomplete-suggestion"
                 data-testid="autocomplete-suggestion"
                 key={suggestion._id}
@@ -135,7 +137,7 @@ const Autocomplete: FunctionComponent<Props> = ({ pokemons }) => {
         className="game-form-autocomplete-input"
         data-testid="game-form-autocomplete-input"
         onKeyDown={handlerKeyDown}
-        onChange={handlerChange}
+        onInput={handlerInput}
         value={userInput}
       />
       {showSuggestions && suggestionsListComponent}

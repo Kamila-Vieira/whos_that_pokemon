@@ -4,6 +4,7 @@ import { Spinner } from "../../../styles/GlobalStyles";
 import ButtonPlay from "../ButtonPlay";
 import ButtonRestart from "../ButtonRestart";
 import GameForm from "../GameForm";
+import WinnerContent from "../WinnerContent";
 
 import { Container } from "./styles";
 
@@ -31,7 +32,7 @@ const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
             case "won":
               return (
                 <div data-testid="state-won" className="state-won">
-                  state {gameState}
+                  <WinnerContent />
                 </div>
               );
             case "lost":
@@ -40,7 +41,7 @@ const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
                   <h3>
                     You lost! The secret Pokémon was {raffledPokemon?.name}!
                   </h3>
-                  <ButtonRestart text="Play again" />
+                  <ButtonRestart />
                 </div>
               );
             default:

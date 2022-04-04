@@ -23,7 +23,7 @@ test("should render autocomplete list if has results", async () => {
   const gameFormAutocompleteInput = screen.getByTestId(
     "game-form-autocomplete-input"
   );
-  fireEvent.change(gameFormAutocompleteInput, { target: { value: "test" } });
+  fireEvent.input(gameFormAutocompleteInput, { target: { value: "test" } });
 
   const gameFormAutocompleteContent = screen.getByTestId(
     "autocomplete-suggestions"
@@ -37,7 +37,7 @@ test("should render autocomplete empty text if not has results", async () => {
   const gameFormAutocompleteInput = screen.getByTestId(
     "game-form-autocomplete-input"
   );
-  fireEvent.change(gameFormAutocompleteInput, { target: { value: "test" } });
+  fireEvent.input(gameFormAutocompleteInput, { target: { value: "test" } });
 
   const gameFormAutocompleteContent = screen.getByTestId(
     "autocomplete-no-suggestions"
