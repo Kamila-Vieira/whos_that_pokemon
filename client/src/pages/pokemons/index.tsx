@@ -1,16 +1,22 @@
 import { FunctionComponent } from "react";
 import PokemonsList from "../../components/Pokemons/PokemonsList";
-import { Container } from "../../styles/GlobalStyles";
+import { Container, LoaderContainer, Spinner } from "./styles";
 import { usePokemonContext } from "../../context/PokemonContext";
 
 const Pokemons: FunctionComponent = () => {
   const {
-    gameState: { allPokemons },
+    gameState: { allPokemons, isLoading },
   } = usePokemonContext();
 
   return (
     <Container data-testid="app-pokemons">
-      <PokemonsList pokemons={allPokemons} />
+      {isLoading ? (
+        <LoaderContainer>
+          <Spinner size="50px" />
+        </LoaderContainer>
+      ) : (
+        <PokemonsList pokemons={allPokemons} />
+      )}
     </Container>
   );
 };

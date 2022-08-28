@@ -4,10 +4,10 @@ export const HeaderContainer = styled.header`
   padding: 20px;
   background-color: #fff;
   border-bottom: 2px solid #ff0000;
-  position: fixed;
-    right: 0;
-    left: 0;
-    top: 0;
+  position: sticky;
+  right: 0;
+  left: 0;
+  top: 0;
 `;
 
 export const HeaderContent = styled.div`

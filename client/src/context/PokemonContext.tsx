@@ -11,7 +11,7 @@ import { GameState, ContextProps } from "../typings/pokemons";
 export const DEFAULT_VALUES: GameState = {
   raffledPokemon: null,
   selectedPokemon: null,
-  isLoading: false,
+  isLoading: true,
   attempts: 0,
   state: "init",
   answers: [],
@@ -28,8 +28,17 @@ export const PokemonContextProvider: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const allPokemons = await Api.getAllPokemons();
-      setGameState({ ...gameState, allPokemons });
+      await Api.getAllPokemons()
+        .then((response) => {
+          setGameState({
+            ...gameState,
+            allPokemons: response,
+            isLoading: false,
+          });
+        })
+        .catch((err) => {
+          setGameState({ ...gameState, allPokemons: [], isLoading: false });
+        });
     })();
   }, []);
 

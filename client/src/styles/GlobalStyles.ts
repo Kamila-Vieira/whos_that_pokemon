@@ -57,7 +57,7 @@ export const Spinner = styled.div<{
 export const Container = styled.main`
   max-width: 1220px;
   margin: 10px auto;
-  height: calc(100vh - 110px);
+  height: 100vh;
   @media (max-width: 1220px) {
     padding: 0 15px;
   }

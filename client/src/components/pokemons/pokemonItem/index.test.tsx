@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import PokemonItem from ".";
 import { Pokemon } from "../../../typings/pokemons";
 
@@ -27,5 +27,15 @@ test("each card should render props fields unless prop _id", () => {
       // eslint-disable-next-line jest/no-conditional-expect
       expect(pokemonItem).toContainElement(pokemonPropTag);
     }
+  }
+});
+
+test("each input should be able on edit", () => {
+  render(<PokemonItem pokemon={pokemonTest} />);
+  const pokemonInputs = screen.getAllByTestId("pokemon-input");
+  const buttonEdit = screen.getByTestId("button-edit");
+  fireEvent.click(buttonEdit);
+  for (const pokemonInput in pokemonInputs) {
+    expect(pokemonInput).not.toBeDisabled();
   }
 });

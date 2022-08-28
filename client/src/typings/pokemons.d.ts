@@ -6,6 +6,13 @@ export type Pokemon = {
   weight: string;
   height: string;
 };
+export type PokemonData = {
+  name: string;
+  type1: string;
+  type2: string;
+  weight: string;
+  height: string;
+};
 
 export type Pokemons = {
   pokemons: Pokemon[];

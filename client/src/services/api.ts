@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Pokemon } from "../typings/pokemons";
+import { PokemonData } from "../typings/pokemons";
 
 const Api = {
   getAllPokemons: async () => {
@@ -28,7 +28,7 @@ const Api = {
       return [];
     }
   },
-  createPokemon: async (data: Pokemon) => {
+  createPokemon: async (data: PokemonData) => {
     try {
       await axios({
         url: `/pokemon`,
@@ -41,7 +41,7 @@ const Api = {
       return false;
     }
   },
-  updatePokemon: async (id: string, data: Pokemon) => {
+  updatePokemon: async (id: string, data: PokemonData) => {
     try {
       await axios({
         url: `/pokemon/${id}`,
