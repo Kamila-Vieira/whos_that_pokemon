@@ -6,8 +6,10 @@ import initSupply, { createInitialPokemon } from "./middlewares/initSupply";
 import { PokemonModel } from "../typings/pokemon";
 import mongoose from "mongoose";
 
+const isTestEnvironment = process.env.NODE_ENV === "test";
+
 config({
-  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env",
+  path: isTestEnvironment ? ".env.test" : ".env",
 });
 
 class App {
@@ -19,7 +21,7 @@ class App {
     this.middlewares();
     this.connection();
     this.routes();
-    this.insertSupply(true);
+    this.insertSupply(!isTestEnvironment);
   }
 
   middlewares() {
