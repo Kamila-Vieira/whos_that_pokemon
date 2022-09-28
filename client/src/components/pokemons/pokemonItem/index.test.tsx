@@ -1,6 +1,24 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import PokemonItem from ".";
+import { PokemonContext } from "../../../context/PokemonContext";
 import { Pokemon } from "../../../typings/pokemons";
+import { GameState } from "../../../typings/pokemons";
+
+const defaultContext: {
+  gameState: GameState;
+  setGameState: () => void;
+} = {
+  gameState: {
+    raffledPokemon: null,
+    selectedPokemon: null,
+    isLoading: false,
+    attempts: 1,
+    state: "init",
+    answers: [],
+    allPokemons: [],
+  },
+  setGameState: () => {},
+};
 
 const pokemonTest: Pokemon = {
   _id: "1",
@@ -12,13 +30,21 @@ const pokemonTest: Pokemon = {
 };
 
 test("should render a pokemon card", () => {
-  render(<PokemonItem pokemon={pokemonTest} />);
+  render(
+    <PokemonContext.Provider value={defaultContext}>
+      <PokemonItem pokemon={pokemonTest} />
+    </PokemonContext.Provider>
+  );
   const pokemonItem = screen.getByTestId("pokemon-card");
   expect(pokemonItem).toBeInTheDocument();
 });
 
 test("each card should render props fields unless prop _id", () => {
-  render(<PokemonItem pokemon={pokemonTest} />);
+  render(
+    <PokemonContext.Provider value={defaultContext}>
+      <PokemonItem pokemon={pokemonTest} />
+    </PokemonContext.Provider>
+  );
   const pokemonItem = screen.getByTestId("pokemon-card");
   for (const propKey in pokemonTest) {
     propKey as keyof Pokemon;
@@ -31,11 +57,15 @@ test("each card should render props fields unless prop _id", () => {
 });
 
 test("each input should be able on edit", () => {
-  render(<PokemonItem pokemon={pokemonTest} />);
+  render(
+    <PokemonContext.Provider value={defaultContext}>
+      <PokemonItem pokemon={pokemonTest} />
+    </PokemonContext.Provider>
+  );
   const pokemonInputs = screen.getAllByTestId("pokemon-input");
   const buttonEdit = screen.getByTestId("button-edit");
   fireEvent.click(buttonEdit);
-  for (const pokemonInput in pokemonInputs) {
+  pokemonInputs.forEach((pokemonInput) => {
     expect(pokemonInput).not.toBeDisabled();
-  }
+  });
 });

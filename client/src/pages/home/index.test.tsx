@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Pokemons from ".";
+import Home from ".";
 import { PokemonContext } from "../../context/PokemonContext";
 import { GameState } from "../../typings/pokemons";
 
@@ -19,12 +19,22 @@ const defaultContext: {
   setGameState: () => {},
 };
 
-test("should render a pokemons page", () => {
+test("should render a home page", () => {
   render(
     <PokemonContext.Provider value={defaultContext}>
-      <Pokemons />
+      <Home />
     </PokemonContext.Provider>
   );
-  const pokemons = screen.getByTestId("app-pokemons");
-  expect(pokemons).toBeInTheDocument();
+  const home = screen.getByTestId("app-home");
+  expect(home).toBeInTheDocument();
+});
+
+test("should render a game container", () => {
+  render(
+    <PokemonContext.Provider value={defaultContext}>
+      <Home />
+    </PokemonContext.Provider>
+  );
+  const game = screen.getByTestId("game-container");
+  expect(game).toBeInTheDocument();
 });

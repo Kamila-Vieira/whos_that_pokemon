@@ -16,9 +16,7 @@ export default createGlobalStyle`
   body{
     font-family: 'Poppins', sans-serif;
   }
-  html, body, #root{
-    height: 100%;
-  }
+  
   button{
     cursor: pointer;
   }
@@ -57,7 +55,6 @@ export const Spinner = styled.div<{
 export const Container = styled.main`
   max-width: 1220px;
   margin: 10px auto;
-  height: 100vh;
   @media (max-width: 1220px) {
     padding: 0 15px;
   }

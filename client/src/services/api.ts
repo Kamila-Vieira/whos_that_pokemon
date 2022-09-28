@@ -4,13 +4,11 @@ import { PokemonData } from "../typings/pokemons";
 const Api = {
   getAllPokemons: async () => {
     try {
-      const {
-        data: { pokemons },
-      } = await axios({
+      const response = await axios({
         url: "/pokemons",
         method: "GET",
       });
-      return pokemons;
+      return await response.data.pokemons;
     } catch (error) {
       console.error(error);
       return [];
@@ -18,11 +16,11 @@ const Api = {
   },
   getPokemon: async (id: string) => {
     try {
-      const { data } = await axios({
+      const response = await axios({
         url: `/pokemon/${id}`,
         method: "GET",
       });
-      return data;
+      return await response.data;
     } catch (error) {
       console.error(error);
       return [];
