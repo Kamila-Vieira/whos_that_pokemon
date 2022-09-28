@@ -1,11 +1,4 @@
-import {
-  FunctionComponent,
-  useState,
-  FormEvent,
-  MouseEvent,
-  KeyboardEvent,
-  useRef,
-} from "react";
+import { FunctionComponent, useState, FormEvent, MouseEvent, KeyboardEvent, useRef } from "react";
 import { usePokemonContext } from "../../../context/PokemonContext";
 import { Pokemon } from "../../../typings/pokemons";
 
@@ -37,10 +30,12 @@ const Autocomplete: FunctionComponent<Props> = ({ pokemons }) => {
     const userInput = e.currentTarget.value;
 
     const filteredSuggestions = pokemons.filter(
-      (pokemon) =>
-        pokemon.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+      (pokemon) => pokemon.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
-
+    setGameState({
+      ...gameState,
+      selectedPokemon: !userInput.trim().length ? null : filteredSuggestions[0],
+    });
     setActiveSuggestionIndex(0);
     setSuggestions(filteredSuggestions);
     setShowSuggestions(true);

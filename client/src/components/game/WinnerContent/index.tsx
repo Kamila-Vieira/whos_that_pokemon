@@ -6,9 +6,9 @@ import { Container } from "./styles";
 const WinnerContent: FunctionComponent = () => {
   return (
     <Container data-testid="game-winner">
+      <h3>Você ganhou!</h3>
       <GameResults />
-      <h3>You Win!</h3>
-      <ButtonRestart  />
+      <ButtonRestart />
     </Container>
   );
 };

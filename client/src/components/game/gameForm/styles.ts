@@ -10,6 +10,10 @@ export const FormContainer = styled.form<{ isLoading?: boolean }>`
   .game-form-content {
     display: flex;
     align-items: center;
-    margin-bottom: 60px;
   }
+`;
+
+export const ErrorMessage = styled.strong`
+  margin-top: 10px;
+  color: #ff0000;
 `;

@@ -1,13 +1,8 @@
-import { FunctionComponent } from "react";
 import { DEFAULT_VALUES, usePokemonContext } from "../../../context/PokemonContext";
 import defaults from "../../../mocks/defaults";
 import { ButtonSubmit } from "../../../styles/GlobalStyles";
 
-type Props = {
-  text?: string;
-};
-
-const ButtonRestart: FunctionComponent<Props> = ({ text = "Play again" }) => {
+const ButtonRestart = () => {
   const { gameState, setGameState } = usePokemonContext();
 
   const handlerClick = () => {
@@ -32,7 +27,7 @@ const ButtonRestart: FunctionComponent<Props> = ({ text = "Play again" }) => {
       buttonFont="25px"
       onClick={handlerClick}
     >
-      {text}
+      Jogar novamente
     </ButtonSubmit>
   );
 };

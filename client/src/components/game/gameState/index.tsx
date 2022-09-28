@@ -39,9 +39,7 @@ const GameState: FunctionComponent<Props> = ({ gameState = "init" }) => {
             case "lost":
               return (
                 <div data-testid="state-lost" className="state-lost">
-                  <h3>
-                    You lost! The secret Pokémon was {raffledPokemon?.name}!
-                  </h3>
+                  <h3>Você perdeu! O Pokémon secreto foi {raffledPokemon?.name}!</h3>
                   <ButtonRestart />
                 </div>
               );

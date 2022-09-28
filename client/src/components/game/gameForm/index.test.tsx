@@ -30,7 +30,7 @@ test("should render a form button submit", () => {
   const gameForm = screen.getByTestId("game-form");
   const gameFormSubmit = screen.getByTestId("game-form-submit");
   expect(gameForm).toContainElement(gameFormSubmit);
-  expect(gameFormSubmit).toHaveTextContent("Verify");
+  expect(gameFormSubmit).toHaveTextContent("Verificar");
 });
 
 test("should change a button submit text", () => {
@@ -58,5 +58,5 @@ test("should change a button submit text", () => {
 
   const gameFormSubmit = screen.getByTestId("game-form-submit");
 
-  expect(gameFormSubmit).toHaveTextContent("Try again");
+  expect(gameFormSubmit).toHaveTextContent("Tentar novamente");
 });

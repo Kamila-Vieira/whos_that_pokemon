@@ -1,15 +1,10 @@
-import { FunctionComponent } from "react";
 import { usePokemonContext } from "../../../context/PokemonContext";
 import defaults from "../../../mocks/defaults";
 import { ButtonSubmit } from "../../../styles/GlobalStyles";
 import { Pokemon } from "../../../typings/pokemons";
 import helpers from "../../../utils/helpers";
 
-type Props = {
-  text?: string;
-};
-
-const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
+const ButtonPlay = () => {
   const { gameState, setGameState } = usePokemonContext();
 
   const handlerClick = () => {
@@ -41,7 +36,7 @@ const ButtonPlay: FunctionComponent<Props> = ({ text = "Play" }) => {
       buttonFont="25px"
       onClick={handlerClick}
     >
-      {text}
+      Jogar
     </ButtonSubmit>
   );
 };
