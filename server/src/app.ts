@@ -1,9 +1,8 @@
 import express, { Application } from "express";
 import { config } from "dotenv";
-import axios from "axios";
 import routes from "./routes";
 import connection from "./database";
-import initSupply from "./middlewares/initSupply";
+import initSupply, { createInitialPokemon } from "./middlewares/initSupply";
 import { PokemonModel } from "../typings/pokemon";
 import mongoose from "mongoose";
 
@@ -20,7 +19,7 @@ class App {
     this.middlewares();
     this.connection();
     this.routes();
-    this.insertSupply(false);
+    this.insertSupply(true);
   }
 
   middlewares() {
@@ -48,15 +47,17 @@ class App {
       const pokemons = await initSupply(!insert);
       pokemons.forEach(async (pokemon: PokemonModel) => {
         try {
-          await axios({
-            url: `/pokemon`,
-            method: "POST",
-            baseURL: `${process.env.HOST}:${process.env.PORT}`,
-            data: JSON.parse(JSON.stringify(pokemon)),
-          });
-          console.log({
-            message: `Supply ${pokemon.name} inserted successfully`,
-          });
+          const created = await createInitialPokemon(pokemon);
+
+          if (created) {
+            console.log({
+              message: `Supply ${pokemon.name} inserted successfully`,
+            });
+          } else {
+            console.log({
+              message: `Supply ${pokemon.name} not inserted`,
+            });
+          }
         } catch (error) {
           const throwError = new Error(error);
           const { message, name } = throwError;
