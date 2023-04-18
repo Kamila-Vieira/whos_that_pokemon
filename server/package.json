@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node ./src/server.ts\"",
     "build": "tsc",
-    "start": "yarn build && node dist/src/server.js",
+    "start": "npm run build && node dist/src/server.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles"
   },
   "keywords": [],
